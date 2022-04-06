@@ -59,7 +59,7 @@ class PortTool:
                     self.last_request = datetime.strptime(self.last_request, "%Y-%m-%d %H:%M:%S %f %z")
                 return res
             else:
-                raise FailedRequest("Res code: {}, Reason: {}, Message: {}".format(res.status_code, res.reason, res.get("msg")), res)
+                raise FailedRequest("Res code: {}, Reason: {}, Message: {}".format(res.status_code, res.reason, data.get("msg")), res)
         else:
             raise ResponseError ("Res code: {}, Reason: {}".format(res.status_code, res.reason), res)
 
