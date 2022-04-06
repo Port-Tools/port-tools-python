@@ -14,7 +14,7 @@ class FailedRequest(Exception):
 
 
 
-class PortTool:
+class PortTools:
     URL_ENDPOINT = "https://port.tools/api/remote"
 
     def __init__(self, id, key = None, cache_time = None, retry = 0, use_last_if_error=True):

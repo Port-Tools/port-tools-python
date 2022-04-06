@@ -1,5 +1,5 @@
 from time import sleep
-from port_tools.sdk import PortTool
+from port_tools.sdk import PortTools
 import unittest
 
 class RequestTest(unittest.TestCase):
@@ -9,13 +9,13 @@ class RequestTest(unittest.TestCase):
     key = None
 
     def test_request(self):
-        p = PortTool(id="716107D963")
+        p = PortTools(id="716107D963")
         # Get info
         ipv4, ipv6, update, request = p.remote_info
         assert(ipv4)
 
     def test_cache_in_expired_time(self):
-        p = PortTool(id=self.id, cache_time=10)
+        p = PortTools(id=self.id, cache_time=10)
         # Get info
         ipv4, ipv6, update, request1 = p.remote_info
         ipv4, ipv6, update, request2 = p.remote_info
@@ -24,7 +24,7 @@ class RequestTest(unittest.TestCase):
         assert(ipv6 == self.ipv6)
 
     def test_cache_out_expired_time(self):
-        p = PortTool(id=self.id, cache_time=10)
+        p = PortTools(id=self.id, cache_time=10)
         # Get info
         ipv4, ipv6, update, request1 = p.remote_info
         assert(ipv4 == self.ipv4)
@@ -36,8 +36,8 @@ class RequestTest(unittest.TestCase):
         assert(ipv6 == self.ipv6)
 
     def test_retry(self):
-        PortTool.URL_ENDPOINT = "https://port.tools/api/remote_error"
-        p = PortTool(id=self.id, retry=10)
+        PortTools.URL_ENDPOINT = "https://port.tools/api/remote_error"
+        p = PortTools(id=self.id, retry=10)
         # Get info
         try:
             ipv4, ipv6, update, request1 = p.remote_info
@@ -46,8 +46,8 @@ class RequestTest(unittest.TestCase):
         assert(True)
 
     def test_use_last_if_error(self):
-        PortTool.URL_ENDPOINT = "https://port.tools/api/remote_error"
-        p = PortTool(id=self.id, retry=10)
+        PortTools.URL_ENDPOINT = "https://port.tools/api/remote_error"
+        p = PortTools(id=self.id, retry=10)
         # Get info
         try:
             p.update()
